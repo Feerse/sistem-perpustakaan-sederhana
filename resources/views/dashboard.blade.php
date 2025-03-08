@@ -5,42 +5,38 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            {{-- <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+    <div class="pb-12">
+        {{-- Banner --}}
+        <div class="relative">
+            <img src="{{ asset('storage/banner.jpg') }}" alt="Banner" class="w-full h-96 brightness-50 object-cover">
+            <div class="absolute inset-0 flex items-center justify-center text-gray-100 text-center">
+                <div>
+                    <h1 class="text-5xl font-bold">Pustakaku</h1>
+                    <p class="text-lg md:text-xl mb-8">Platform penyedia buku digital terlengkap</p>
+                    <a href="{{ route('books.index') }}"
+                        class="bg-gray-100 text-gray-900 p-3 rounded-md hover:bg-gray-300 duration-300">Explore</a>
                 </div>
-            </div> --}}
-            {{-- Banner --}}
-            <div class="mt-6">
-                <img src="{{ asset('images/head.jpg') }}" alt="Banner" class="w-full h-64 object-cover rounded-lg">
-            </div>
-
-            {{-- Buku --}}
-            <div class="mt-8">
-                {{-- Novel Section --}}
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {{-- @foreach($books as $book)
-                    <div class="bg-white p-4 shadow rounded-lg">
-                        <img src="{{ asset('images/books/'.$book->cover) }}" alt="Buku"
-                            class="w-full h-40 object-cover rounded">
-                        <h3 class="text-lg font-semibold mt-2">{{ $book->title }}</h3>
-                        <p class="text-gray-500">{{ $book->author }}</p>
-                        <a href="{{ route('book.detail', $book->id) }}"
-                            class="block mt-2 bg-blue-500 text-white text-center py-2 rounded">
-                            Detail
-                        </a>
-                    </div>
-                    @endforeach --}}
-                </div>
-            </div>
-
-            {{-- Tombol Lainnya --}}
-            <div class="text-center mt-6">
-                {{-- <a href="{{ route('books.all') }}" class="px-4 py-2 bg-gray-700 text-white rounded">
-                    Lainnya...
-                </a> --}}
             </div>
         </div>
+
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            {{-- Buku --}}
+            <div class="mt-16">
+                <h2 class="mb-5 text-2xl font-bold">Books</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    @foreach($books as $book)
+                    <div class="bg-white p-4 shadow rounded-lg">
+                        <img src="{{ asset('storage/'.$book->cover) }}" alt="Cover Buku"
+                            class="w-full h-40 object-contain rounded">
+                        <h3 class="text-lg font-semibold mt-2">{{ $book->title }}</h3>
+                        <p class="text-gray-500">{{ $book->author }}</p>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            <div class="w-full text-center mt-14 mb-4 animate-bounce">
+                <a href="{{ route('books.index') }}">Lainnya &rarr;</a>
+            </div>
+        </div>
+    </div>
 </x-app-layout>

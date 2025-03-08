@@ -26,17 +26,17 @@ class BorrowingResource extends Resource
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->required()
-                    ->disabled(fn(Borrowing $record) => $record->status === 'dikembalikan'),
+                    ->disabled(fn(?Borrowing $record) => $record?->status === 'dikembalikan'),
                 Forms\Components\Select::make('book_id')
                     ->relationship('book', 'title')
                     ->required()
-                    ->disabled(fn(Borrowing $record) => $record->status === 'dikembalikan'),
+                    ->disabled(fn(?Borrowing $record) => $record?->status === 'dikembalikan'),
                 Forms\Components\DatePicker::make('borrow_date')
                     ->required()
-                    ->disabled(fn(Borrowing $record) => $record->status === 'dikembalikan'),
+                    ->disabled(fn(?Borrowing $record) => $record?->status === 'dikembalikan'),
                 Forms\Components\DatePicker::make('return_date')
                     ->required()
-                    ->disabled(fn(Borrowing $record) => $record->status === 'dikembalikan'),
+                    ->disabled(fn(?Borrowing $record) => $record?->status === 'dikembalikan'),
                 Forms\Components\Radio::make('status')
                     ->label('Status')
                     ->options([
@@ -46,7 +46,7 @@ class BorrowingResource extends Resource
                     ->inline()
                     ->required()
                     ->visibleOn('edit')
-                    ->disabled(fn(Borrowing $record) => $record->status === 'dikembalikan'),
+                    ->disabled(fn(?Borrowing $record) => $record?->status === 'dikembalikan'),
             ]);
     }
 
@@ -54,11 +54,9 @@ class BorrowingResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('user.name')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('book_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('book.title')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('borrow_date')
                     ->date()
